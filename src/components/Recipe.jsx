@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
-const RecipeContainer = styled.div`
+export const RecipeContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -19,12 +19,12 @@ const RecipeContainer = styled.div`
   }
 `;
 
-const CoverImage = styled.img`
+export const CoverImage = styled.img`
 object-fit: cover;
 height: 200px;
 `;
 
-const RecipeName = styled.span`
+export const RecipeName = styled.span`
   font-size: 1.2rem;
   font-weight: bold;
   margin: 10px 0;
@@ -39,7 +39,7 @@ const RecipeName = styled.span`
   }
 `;
 
-const SeeMoreText = styled.span`
+export const SeeMoreText = styled.span`
 color: #393E46;
   font-size: 1rem;
   text-align: center;
@@ -54,7 +54,7 @@ color: #393E46;
   }
 `;
 
-const IngredientsText = styled(SeeMoreText)`
+export const IngredientsText = styled(SeeMoreText)`
 color: #222831;
   border: solid 1px #FF6363;
   margin-bottom: 12px;
@@ -64,17 +64,4 @@ color: #222831;
   }
 `;
 
-const Recipe = () => {
-
-  return (
-    <RecipeContainer>
-      <CoverImage src="https://qph.fs.quoracdn.net/main-qimg-c2361d48ebd9e8584ba43686407ff679" />
-      <RecipeName>Lorem, ipsum.</RecipeName>
-      <IngredientsText>Ingredients</IngredientsText>
-      <SeeMoreText>See More</SeeMoreText>
-    </RecipeContainer>
-  );
-}
-
-export default Recipe;
 
