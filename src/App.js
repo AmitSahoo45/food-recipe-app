@@ -62,7 +62,7 @@ const Recipe = (props) => {
       fontSize: 15,
       fontWeight: 'bold',
       // wordBreak: 'break-word'
-      ['@media (max-width:780px)']: {
+      '@media (max-width:780px)': {
         width: '30vw'
       }
     }
@@ -190,7 +190,7 @@ function App() {
       </Header>
       <RecipeListContainer>
         {
-          (recipeList.length == 0) ? (
+          (recipeList.length === 0) ? (
             <CircularProgress
               style={{
                 color: '#CA9703'
