@@ -40,27 +40,28 @@ export const RecipeName = styled.span`
 `;
 
 export const SeeMoreText = styled.span`
-color: #393E46;
+  color: #000000;
   font-size: 1rem;
   text-align: center;
+  font-weight: bold;
   border: solid 1px #95CD41;
   border-radius: 6px;
   padding: 10px 15px;
   cursor: pointer;
   transition: all 0.3s ease-out;
   &:hover{
-    border: solid 1px #78523F;
-    background-color: #95CD41;
+    border: solid 1px #0F0E0E;
+    background-color: #FF7F3F;
   }
 `;
 
 export const IngredientsText = styled(SeeMoreText)`
-color: #222831;
+  color: #000000;
   border: solid 1px #FF6363;
   margin-bottom: 12px;
   &:hover{
-    border: solid 1px #78523F;
-    background-color: #FF6363;
+    border: solid 1px #0F0E0E;
+    background-color: #95CD41;
   }
 `;
 

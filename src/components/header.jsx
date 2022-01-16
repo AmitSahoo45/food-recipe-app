@@ -11,6 +11,10 @@ export const Header = styled.div`
   font-size: 1rem;
   font-weight: bold;
   box-shadow: -1px 1px 8px 0px rgba(151,151,151,0.75);
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 1.1rem 0;
+  }
 `;
 
 export const SearchBox = styled.div`
@@ -21,6 +25,9 @@ export const SearchBox = styled.div`
   margin-left: 20px;
   width: 50%;
   background-color: #ffffff;
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 export const RecipeImage = styled.img`
@@ -42,4 +49,7 @@ export const SearchInput = styled.input`
   outline: none;
   margin-left: 15px;
   font-family: 'Inter', sans-serif;
+  @media (max-width: 768px){
+    width: 80%
+  }
 `;

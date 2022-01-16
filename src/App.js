@@ -6,7 +6,7 @@ import { Header, RecipeImage, SearchBox, SearchIcon, SearchInput } from './compo
 import axios from 'axios';
 import { CoverImage, IngredientsText, RecipeContainer, RecipeName, SeeMoreText } from './components/Recipe';
 import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress, Dialog, AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import { CircularProgress, Dialog, AppBar, Toolbar, Typography, IconButton, DialogContent } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 
 const Container = styled.div`
@@ -32,15 +32,40 @@ const RecipeListContainer = styled.div`
   justify-content: space-evenly;
 `;
 
+const useStyles = makeStyles((theme) => ({
+  header: {
+    cursor: 'pointer',
+    ['@media (max-width:780px)']: { // eslint-disable-line no-useless-computed-key
+      fontWeight: 10,
+    }
+  },
+}));
+
 const Recipe = (props) => {
   const useStyles = makeStyles((theme) => ({
     appBar: {
       position: 'relative',
+      background: '#EA5C2B'
     },
     title: {
       marginLeft: theme.spacing(2),
       flex: 1,
     },
+    tables: {
+      minWidth: '100vw'
+    },
+    tableHead: {
+      fontFamily: 'Inter',
+      fontSize: 20
+    },
+    tabeleCont: {
+      fontSize: 15,
+      fontWeight: 'bold',
+      // wordBreak: 'break-word'
+      ['@media (max-width:780px)']: {
+        width: '30vw'
+      }
+    }
   }));
 
   const classes = useStyles();
@@ -51,25 +76,53 @@ const Recipe = (props) => {
   const handleClose = () => {
     setshow(false);
   };
-
   return (
     <>
       <Dialog
         open={show}
         onClose={handleClose}
         fullScreen
-        // TransitionComponent={Transition}
       >
         <AppBar className={classes.appBar}>
           <Toolbar>
+            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+              <CloseIcon />
+            </IconButton>
             <Typography variant="h6" className={classes.title}>
               Ingredients
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              Close
-            </Button>
           </Toolbar>
         </AppBar>
+        <DialogContent>
+          <RecipeName>{recipeObj.label}</RecipeName>
+          <table className={classes.tables}>
+            <thead className={classes.tableHead}>
+              <th>Ingredients</th>
+              <th>Weight</th>
+            </thead>
+            <tbody className={classes.tabeleCont}>
+              {
+                recipeObj.ingredients.map((ingredient, index) => (
+                  <tr key={index} >
+                    <td
+                      style={{
+                        padding: '0.3rem 0',
+                        wordBreak: 'break-word',
+                        width: '50vw'
+                      }}
+                    >{ingredient.text}</td>
+                    <td
+                      style={{
+                        padding: '0.3rem 0',
+                        textAlign: 'center',
+                      }}
+                    >{ingredient.weight}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </DialogContent>
       </Dialog>
       <RecipeContainer>
         <CoverImage src={recipeObj.image} />
@@ -95,6 +148,8 @@ function App() {
   const [timeoutId, updateTimeoutId] = useState();
   const [recipeList, setRecipeList] = useState([]);
 
+  const classes = useStyles();
+
   const fetchRecipe = async (searchString) => {
     const response = await axios.get(`https://api.edamam.com/search?q=${searchString}&app_id=${APP_ID}&app_key=${APP_KEY}`);
     console.log(response.data.hits)
@@ -116,9 +171,10 @@ function App() {
         <AppName>
           <RecipeImage src={recipeimg} />
           <h1
-            style={{
-              cursor: 'pointer'
-            }}
+            className={classes.header}
+            onClick={() =>
+              window.location.reload(false)
+            }
           >
             Haq Se Foodie
           </h1>
@@ -150,7 +206,7 @@ function App() {
             )
         }
       </RecipeListContainer>
-    </Container>
+    </Container >
   );
 }
 
