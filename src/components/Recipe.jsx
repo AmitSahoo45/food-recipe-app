@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const RecipeContainer = styled.div`
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   padding: 10px;

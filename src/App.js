@@ -6,8 +6,9 @@ import { Header, RecipeImage, SearchBox, SearchIcon, SearchInput } from './compo
 import axios from 'axios';
 import { CoverImage, IngredientsText, RecipeContainer, RecipeName, SeeMoreText } from './components/Recipe';
 import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress, Dialog, AppBar, Toolbar, Typography, IconButton, DialogContent } from '@material-ui/core';
+import { Dialog, AppBar, Toolbar, Typography, IconButton, DialogContent } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import Initial from './components/Initial/Initial';
 
 const Container = styled.div`
   display: flex;
@@ -95,6 +96,29 @@ const Recipe = (props) => {
         </AppBar>
         <DialogContent>
           <RecipeName>{recipeObj.label}</RecipeName>
+          <div>
+            <Typography variant="h6" >Cuisine : {recipeObj.cuisineType[0]}</Typography>
+            <Typography variant="subtitle1" >Meal Type : {recipeObj.mealType}</Typography>
+            <Typography variant="subtitle1" >
+              <Typography variant="subtitle1"
+                style={{
+                  fontWeight: 'bold',
+                }}
+              >Diet Labels</Typography>
+              <ol
+                style={{
+                  padding: '0 0 0 1.3rem',
+                  margin: '0'
+                }}
+              >
+                {
+                  recipeObj.dietLabels.map((diet, index) => (
+                    <li>{diet}</li>
+                  ))
+                }
+              </ol>
+            </Typography>
+          </div>
           <table className={classes.tables}>
             <thead className={classes.tableHead}>
               <th>Ingredients</th>
@@ -116,7 +140,7 @@ const Recipe = (props) => {
                         padding: '0.3rem 0',
                         textAlign: 'center',
                       }}
-                    >{ingredient.weight}</td>
+                    >{ingredient.weight.toFixed(2)}</td>
                   </tr>
                 ))
               }
@@ -191,13 +215,7 @@ function App() {
       <RecipeListContainer>
         {
           (recipeList.length === 0) ? (
-            <CircularProgress
-              style={{
-                color: '#CA9703'
-              }}
-              size={250}
-              thickness={1}
-            />
+            <Initial />
           ) :
             (
               recipeList.length && recipeList.map((recipeObj) => (

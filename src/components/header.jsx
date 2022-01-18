@@ -26,6 +26,7 @@ export const SearchBox = styled.div`
   width: 50%;
   background-color: #ffffff;
   @media (max-width: 768px) {
+    margin-left: 0px;
     width: 80%;
   }
 `;
